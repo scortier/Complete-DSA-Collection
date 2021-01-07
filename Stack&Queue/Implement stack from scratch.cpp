@@ -7,7 +7,7 @@ push,pop,peek(return top without modifying stack)
 #include<bits/stdc++.h>
 using namespace std;
 
-// define default capacity of the stac
+// define default capacity of the stack
 #define SIZE 10
 
 // Class for stack
