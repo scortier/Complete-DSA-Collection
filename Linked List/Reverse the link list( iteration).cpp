@@ -1,5 +1,27 @@
-/*Time Complexity: O(n)
-Space Complexity: O(1)*/
+/*
+Input: Head of following linked list
+1->2->3->4->NULL
+Output: Linked list should be changed to,
+4->3->2->1->NULL
+
+APPROACH:
+-- pointers : head,curr,prev,next.
+prev and next == NULL
+curr == first ele (i.e head)
+
+STEPS:
+
+DO IT TILL curr becomes NULL i.e [while(curr!=NULL)]
+1.Before changing curr->next store it in `next`. i.e next=curr->next;
+2.Now change curr->next(next of curr) by reversing the curr->next dirn.
+3.Now move the prev and curr forward in resp manner.
+
+
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -15,7 +37,7 @@ Node *newNode(int x)
 	return temp;
 }
 
-/* Link list node
+/*
 struct Node {
     int data;
     struct Node* next;
@@ -24,9 +46,11 @@ struct Node {
         this->data = data;
         next = NULL;
     }
-};*/
+};
+*/
 
-struct LinkedList {
+struct LinkedList
+{
 	Node* head;
 	LinkedList() {
 		head = NULL;
@@ -34,8 +58,11 @@ struct LinkedList {
 
 	void reverse()
 	{
+		//initializing
 		Node *curr = head;
 		Node *prev = NULL, *next = NULL;
+
+		//Main Condition
 		while (curr != NULL)
 		{
 			next = curr->next;
@@ -55,6 +82,7 @@ struct LinkedList {
 		}
 	}
 
+
 	void push(int data)
 	{
 		Node* temp = newNode(data);
@@ -62,6 +90,8 @@ struct LinkedList {
 		head = temp;
 	}
 };
+
+
 
 
 int main() {

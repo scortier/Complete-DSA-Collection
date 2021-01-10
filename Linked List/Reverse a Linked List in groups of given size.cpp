@@ -1,5 +1,14 @@
-/*Time Complexity: O(n)
-Space Complexity: O(1)*/
+/*Complexity Analysis:
+
+Time Complexity: O(n).
+Traversal of list is done only once and it has ‘n’ elements.
+Auxiliary Space: O(n/k).
+
+For each Linked List of size n, n/k or (n/k)+1 calls will be made during the recursion.
+
+Input: 1->2->3->4->5->6->7->8->NULL, K = 3
+Output: 3->2->1->6->5->4->8->7->NULL
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -15,7 +24,7 @@ Node *newNode(int x)
 	return temp;
 }
 
-/* Link list node
+/*
 struct Node {
     int data;
     struct Node* next;
@@ -32,25 +41,39 @@ struct LinkedList {
 		head = NULL;
 	}
 
-	void reverse(Node* head, int k)
+	/* Reverses the linked list in groups
+	of size k and returns the pointer
+	to the new head node. */
+	Node *reverse (Node *head, int k)
 	{
-		Node *curr = head;
-		int cnt = 0;
-		Node *prev = NULL, *next = NULL;
-		while (curr != NULL and cnt < k)
+		Node* current = head;
+		Node* next = NULL;
+		Node* prev = NULL;
+		int count = 0;
+
+		/*reverse first k nodes of the linked list */
+		while (current != NULL && count < k)
 		{
-			next = curr->next;
-			curr->next = prev;
-			prev = curr;
-			curr = next;
-			cnt++;
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
+			count++;
 		}
-		head = prev;
+
+		/* next is now a pointer to (k+1)th node
+		Recursively call for the list starting from current.
+		And make rest of the list as next of first node */
+		if (next != NULL)
+			head->next = reverse(next, k);
+
+		/* prev is new head of the input list */
+		return prev;
 	}
 
-	void print(Node *temp)
+	void print()
 	{
-		// struct Node* temp = head;
+		struct Node* temp = head;
 		while (temp != NULL) {
 			cout << temp->data << " ";
 			temp = temp->next;
@@ -67,18 +90,26 @@ struct LinkedList {
 
 
 int main() {
+	// Node* head = NULL;
+	/* Created Linked list is 1->2->3->4->5->6->7->8->9 */
 	LinkedList ll;
-	ll.push(20);
+	ll.push(9);
+	ll.push(8);
+	ll.push(7);
+	ll.push(6);
+	ll.push(5);
 	ll.push(4);
-	ll.push(15);
-	ll.push(85);
-
+	ll.push(3);
+	ll.push(2);
+	ll.push(1);
+	int grp = 3;
 	cout << "Given linked list\n";
-	ll.print(head);
+	ll.print();
+	cout << endl;
 
-	ll.reverse();
+	ll.head = ll.reverse(ll.head, grp);
 
 	cout << "\nReversed Linked list \n";
-	ll.print();
+	ll.print(); cout << endl;
 	return 0;
 }
