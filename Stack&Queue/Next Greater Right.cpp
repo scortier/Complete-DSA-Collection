@@ -6,7 +6,7 @@ O/P :  {3,5,7,7,-1}
 
 #include<bits/stdc++.h>
 using namespace std;
-
+/*
 void NGR_brute(int a[], int n)
 {
 	for (int i = 0; i < n; i++)
@@ -17,7 +17,7 @@ void NGR_brute(int a[], int n)
 	for (int i = 0; i < n; i++)
 		cout << a[i] << " ";
 }
-
+*/
 /*
 Stack empty -> -1
 s.top()> arr[i] return s.top()
@@ -31,7 +31,7 @@ void NGR_stack(int arr[], int arr_size)
 	stack<int>st;
 	for (int i = arr_size - 1; i >= 0; i--) //moving from right to left in array
 	{
-		if (st.size() == 0) st.push(-1);	//last ele of array has no ele to its right so -1
+		if (st.size() == 0) v.push_back(-1);	//last ele of array has no ele to its right so -1
 
 		else if (st.size() > 0 and st.top() > arr[i])
 			v.push_back(st.top());
@@ -50,15 +50,15 @@ void NGR_stack(int arr[], int arr_size)
 
 	}
 	reverse(v.begin(), v.end());	// as the iteration happened from last element of array.
-	for (auto i = v.begin(); i != v.end(); ++i)
+	for (auto i = v.begin(); i != v.end(); i++)
 		cout << *i << " ";
 
 }
 int32_t main()
 {
-	int n = 5;
+	int n = 4;
 	// cin >> n;
-	int a[5] = {1, 3, 5, 2, 7};
+	int a[n] = {1, 3, 2, 4};
 	//for (int i = 0; i < n; i++) cin >> a[i];
 	NGR_stack(a, n);
 	return 0;

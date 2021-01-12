@@ -4,18 +4,18 @@ O/P :  {-1,-1,-1,5,-1}
 */
 #include<bits/stdc++.h>
 using namespace std;
-
+/*
 void NGL_brute(int a[], int n)
 {
 	for (int i = n - 1; i >= 0; i--)
 		for (int j = n - 2; j >= 0; j--) {
-			if (a[j] > a[i]) a[i] = a[j]; break;
+			if (a[j] > a[i]) {a[i] = a[j]; break;}
 			else a[i] = -1;
 		}
 	for (int i = 0; i < n; i++)
 		cout << a[i] << " ";
 }
-
+*/
 /*
 Stack empty -> -1
 s.top()> arr[i] return s.top()
@@ -27,9 +27,9 @@ void NGL_stack(int arr[], int arr_size)
 {
 	vector<int>v;// to store the element
 	stack<int>st;
-	for (int = i = 0; i < arr_size; i++) //moving from right to left in array
+	for (int  i = 0; i < arr_size; i++) //moving from right to left in array
 	{
-		if (st.size() == 0) st.push(-1);	//last ele of array has no ele to its right so -1
+		if (st.size() == 0) v.push_back(-1);	//last ele of array has no ele to its right so -1
 
 		else if (st.size() > 0 and st.top() > arr[i])
 			v.push_back(st.top());
@@ -51,11 +51,11 @@ void NGL_stack(int arr[], int arr_size)
 		cout << *i << " ";
 
 }
-int_32 main()
+int32_t main()
 {
-	int n; cin >> n;
-	int a[n];
-	for (int i = 0; i < n; i++) cin >> a[i];
+	int n = 7;
+	int a[n] = {6, 2, 5, 4, 5, 1, 6};
+	// for (int i = 0; i < n; i++) cin >> a[i];
 	NGL_stack(a, n);
 	return 0;
 }
