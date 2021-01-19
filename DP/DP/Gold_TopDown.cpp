@@ -5,7 +5,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
+//topdown
+//recursion+table (to store repetation)
 int Gold_topdown(int gold[][], int m, int n)
 {
 	//base condition
@@ -17,6 +18,9 @@ int Gold_topdown(int gold[][], int m, int n)
 			}
 	}
 }
+
+
+
 int32_t main()
 {
 
