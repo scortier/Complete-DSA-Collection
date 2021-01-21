@@ -4,18 +4,18 @@
 */
 #include<bits/stdc++.h>
 using namespace std;
-#define MOD 100
+#define MAX 100
 
 
-int Gold_topdown(int gold[][], int m, int n)
+int Gold_topdown(int gold[MAX][MAX], int m, int n)
 {
 	//base condition
 	for (int col = n - 1; col >= 0; col--)
 	{
 		for (int row = 0; row <= m; row++)
 		{
-			if (col == n - 1 or row == 0 or row == m - 1) return
-			}
+			if (col == n - 1 or row == 0 or row == m - 1) return 0;
+		}
 	}
 }
 

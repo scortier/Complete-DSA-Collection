@@ -32,9 +32,9 @@ void fast() {
 }
 /**********====================########################=================***********/
 
-int t[8][9];
+int t[1001][1001];
 
-string LCS_TD(string x, string y, int m, int n)
+string LPS(string x, string y, int m, int n)
 {
 	for (int i = 0; i < m + 1; i++)
 	{
@@ -86,21 +86,22 @@ string LCS_TD(string x, string y, int m, int n)
 
 }
 
-
-
+// LPS(a) === LCS(a,reverse(a));
 int32_t main()
 {
 	fast();
 	memset(t, -1, sizeof(t));	//initialize whole matrix with -1.
 	string x = "abcdgh";
-	string y = "abedfhr";
-	// cin >> x >> y;
+	// cin >> x ;
+	string y = string(x.rbegin(), x.rend());	//reverse of x stored in y.
 	int n = y.size();
 	int m = x.size();
-	cout << LCS_TD(x, y, m, n);
+	string z = LPS(x, y, m, n);
+	cout << z;
 	return 0;
 }
-
+//FOR MIN NO OF DELETION IN STRING TO MAKE IT PALINDROME
+// = string.length() - LPS
 
 // input:
 // abcdgh

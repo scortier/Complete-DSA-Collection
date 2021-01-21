@@ -25,10 +25,10 @@ const int maxm = 2e6 + 10;
 
 void fast() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
+// #ifndef ONLINE_JUDGE
+// 	freopen("input.txt", "r", stdin);
+// 	freopen("output.txt", "w", stdout);
+// #endif
 }
 /**********====================########################=================***********/
 
@@ -53,7 +53,7 @@ string LCS_TD(string x, string y, int m, int n)
 				// return LCS_TD(x,y,i-1,j-1);
 				t[i][j] = 1 + t[i - 1][j - 1];
 			else
-				t[i][j] = max(t[i - 1][j], t[i][j - 1]);
+				t[i][j] = 0;
 		}
 	}
 
@@ -78,7 +78,7 @@ string LCS_TD(string x, string y, int m, int n)
 		else
 			j--; //right shift
 	}
-	reverse(s.begin(), s.end());
+	reverse(s.begin(), s.end()); 5y
 	return s;
 
 	// // Print the lcs
@@ -92,8 +92,9 @@ int32_t main()
 {
 	fast();
 	memset(t, -1, sizeof(t));	//initialize whole matrix with -1.
-	string x, y;
-	cin >> x >> y;
+	string x = "abcdgh";
+	string y = "abedfhr";
+	// cin >> x >> y;
 	int n = y.size();
 	int m = x.size();
 	cout << LCS_TD(x, y, m, n);
