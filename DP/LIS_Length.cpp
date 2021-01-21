@@ -60,6 +60,10 @@ int LIS_BottomUp(int a[], int n)
 
 
 }
+
+
+//O(nlogn)
+
 int32_t main()
 {
 	int arr[] = { 10, 22, 9, 33, 21, 50, 41, 60 };
