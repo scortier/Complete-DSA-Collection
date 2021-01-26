@@ -11,7 +11,8 @@ If queue became empty that means there are no non repeating character so we will
 #include<bits/stdc++.h>
 using namespace std;
 
-string non_rep(string s)
+//solved using queue
+void non_rep(string s)
 {
 	int cnt_Arr[26] = {0};
 
@@ -36,6 +37,32 @@ string non_rep(string s)
 	}
 	cout << endl;
 }
+
+string FirstNonRepeating(string A) {
+	int n = A.size();
+	vector<int>f(26, 0);
+	vector<int>last(26, -1);
+	for (int i = 0; i < A.size(); i++) {
+		if (last[A[i] - 'a'] == -1)
+			last[A[i] - 'a'] = i;
+	}
+	string ans = "";
+	for (int i = 0; i < A.size(); i++) {
+		f[A[i] - 'a']++;
+		char ch = '#';
+		int x = A.size() + 1;
+		for (int j = 0; j < 26; j++) {
+			if (f[j] == 1 and x > last[j]) {
+				ch = char(j + 'a');
+				x = last[j];
+			}
+		}
+		ans += ch;
+	}
+	return ans;
+}
+//solved using DLL
+
 
 int32_t main()
 {

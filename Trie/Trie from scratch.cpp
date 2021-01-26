@@ -12,13 +12,13 @@ using namespace std;
 
 struct Node {
 	Node *children[26];
-	int count;
+	int word_count;
 };
 
 Node *newNode()
 {
 	Node* temp = new Node;
-	temp->count = 0;
+	temp->word_count = 0;
 	for (int i = 0; i < 26; i++)
 	{
 		temp->children[i] = NULL;
@@ -40,9 +40,9 @@ void insert(Node* root, string s)
 			temp->children[indx] = newNode();//child node=new Node();
 		}
 		temp = temp->children[indx];//current_node=child_node;
-		temp->count = temp->count + 1;
+		temp->word_count += 1;
 	}
-	// cout << count;
+	// cout << word_count;
 }
 
 //SEARCH OPERATION IN STRING
@@ -57,7 +57,7 @@ int search(Node* temp, string s)
 			return 0;
 		temp = temp->children[indx];
 	}
-	return temp->count;
+	return temp->word_count;
 }
 
 // The pseudo code to check wether a single word exists in a dictionary of words or not is as follows:

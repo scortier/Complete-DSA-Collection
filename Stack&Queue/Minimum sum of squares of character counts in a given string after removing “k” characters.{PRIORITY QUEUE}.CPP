@@ -15,9 +15,11 @@ int solve(string s, int k)
 		cnt_arr[s[i] - 'a']++;
 		if (max < cnt_arr[i]) {
 			max = cnt_arr[i];
-			result = (char)(i + 'a');
+			// result = (char)(i + 'a');
 		}
+
 	}
+
 }
 
 int32_t main()
