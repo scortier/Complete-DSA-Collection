@@ -39,7 +39,25 @@ int diameter(Node *root)
 	           max(ld, rd));
 }
 
+//OPTIMIZED
+void dia_opt(Node* root, int h)
+{
+	int lh = 0, rh = 0;
 
+	int ld = 0, rd = 0;
+
+	if (root == NULL) {
+		*h = 0;
+		return 0;
+	}
+	ld = dia_opt(root->left, &lh);
+	rd = dia_opt(root->right, &rh);
+
+	*h = max(lh, rh) + 1;
+
+	return max(lh + rh + 1, max(ld, rd));
+
+}
 int main()
 {
 	Node *root = newNode(1);

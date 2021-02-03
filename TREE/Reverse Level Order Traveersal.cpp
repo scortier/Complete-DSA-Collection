@@ -46,7 +46,7 @@ void ReverseLevelOrder(Node *root)
 	}
 
 	// Now pop all items from stack one by one and print them
-	while (!s.push())
+	while (!s.empty())
 	{
 		Node*toh = s.top();
 		cout << toh->data << " ";
