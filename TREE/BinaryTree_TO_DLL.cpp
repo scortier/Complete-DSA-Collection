@@ -1,4 +1,11 @@
+/*
+APPROACH :
+TC:O(n2) //T(N/2)+T(N/2)+O(N)
+1. convert each tree node to dll nodes with left and right pointer then convert the left and right tree with
+dll then combining both dll with root by shifting the pointer of left tree to end of it and
+for right tree towards the starting of it.
 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 // building a BT
@@ -23,10 +30,10 @@ struct node *convertBSTtoDLL(struct node *root)
 	{
 		//LST TO DLL BUT middle node return to node.
 		struct node *lTree = convertBSTtoDLL(root->left);
-		//as long as there is right element move towards it.
+		//as long as there is right element  move towards it.
 		for (; lTree->right; lTree = lTree->right); //inorder predecesor
 		lTree->right = root; //point rightmost element to root.
-		root->left = lTree;	//return ptr from root left ptr to rightmost element of LST.
+		root->left = lTree;	//return ptr from left tree root ptr to rightmost element of LST.
 	}
 	if (root->right)	//check whether RST exist or not.
 	{
