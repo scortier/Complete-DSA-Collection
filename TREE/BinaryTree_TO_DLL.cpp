@@ -5,6 +5,11 @@ TC:O(n2) //T(N/2)+T(N/2)+O(N)
 dll then combining both dll with root by shifting the pointer of left tree to end of it and
 for right tree towards the starting of it.
 
+2.TC:O(N)
+That pointer shifting from root to end or head takes O(n) .So we can reduce it to O(1)
+by alloting to pointer to the head and tail of each node.
+
+3.
 */
 #include <stdio.h>
 #include <stdlib.h>
