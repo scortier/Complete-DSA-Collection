@@ -31,6 +31,12 @@ void diagonal_UTIL(Node *root , int d, map<int, vector<int>>&mp)
 	//store the nodes of same slope
 	mp[d].push_back(root->data);
 
+//////////FOR DIAGONAL SUM ////////////
+	/*
+	STEPS: 1. REMOVE LINE 32 AND ADD LINE 38 AND CHANGE map<int,int>&mp in declaration thatsit.
+	*/
+	// mp[d]+=root->data;
+
 //if we move left to root the slope wiill increase therfore d+1
 	diagonal_UTIL(root->left, d + 1, mp);
 
