@@ -1,11 +1,6 @@
 /*
 APPROACH:
-https://www.youtube.com/watch?v=MLff3CxNVTc&list=PL-Jc9J83PIiGl_-iS5k7R7SZoZPt0Fab2&index=10
-
-as bst m inorder sorted order m print hota hai
-so reverse of inorder m largest pehle aega mens rst ka right most node pehle visite hoga reverse inorder m usko sum=0 m stor karo and node ki sum se change kardo i.e 0now.
-fir upar gae uske parent ki trf uuse nikala aur sum ki intial val se replace kardiya and uski val sum m add kardi.
-ans so on
+dono ka path visualize karo and from bottom se first common point is lcs
 */
 //Author: Aditya Singh Sisodiya (Scortier)
 #include<bits/stdc++.h>
@@ -24,16 +19,12 @@ Node *newNode(int x)
 	return temp;
 }
 
-int sum = 0;
-void sol(Node *root)
+int lst(Node* root, int d1, int d2)
 {
-	if (root == NULL) return;
-	sol(root->right);
-	int temp = root->data;
-	root->data = sum;
-	sum += temp;
-	sol(temp->left);
+	if (d1 > root->data and d2 > root->data) return lst(root->right, d1, d2);
+	else if (d1 < root->data and d2 < root->data) return lst(root->left, d1, d2);
 
+	else return root->data;
 }
 
 int32_t main()
@@ -56,6 +47,6 @@ int32_t main()
 	root->left->right->left = newNode(10);
 	root->left->right->right = newNode(11);
 
-	sol(root);
+	cout << lst(root, 6, 9);
 	return 0;
 }
