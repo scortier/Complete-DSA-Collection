@@ -20,6 +20,7 @@ Node *newNode(int x)
 }
 void pir(Node* root, int l, int h)
 {
+	if (root == NULL) return;
 	if (l < root->data and h < root->data)
 		return pir(root->left, l, h);
 	else if (l > root->data and h > root->data)
