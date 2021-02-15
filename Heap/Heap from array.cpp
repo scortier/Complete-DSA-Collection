@@ -12,8 +12,24 @@ void heapify(int a[], int n, int i)
 	int l = 2 * i + 1;	//left
 	int r = 2 * i + 2;	//right
 
-	if ()
+	//if left child is larger than root
+	if (l<n and a[l]>a[largest])
+		largest = l;
+
+	//if right child is larger than root
+	if (r<n and a[r]>a[largest])
+		largest = r;
+
+	//if largest is not root
+	if (largest != i) {
+		swap(a[i], a[largest]);
+
+
+		//recursively heapify the affected sub-tree
+		heapify(a, n, largest);
 	}
+
+}
 
 
 // Function to build a Max-Heap from the given array
@@ -22,7 +38,9 @@ void buildHeap(int a[], int n)
 	//index of least non leaf node
 	int startIndex = (n / 2) - 1;
 
-
+	//perform reverse level order traversal from last leaf node and heapify each node
+	for (int i = startIndex; i >= 0; i--)
+		heapify(a, n, i);
 }
 
 
