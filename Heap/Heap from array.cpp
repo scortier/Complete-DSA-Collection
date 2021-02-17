@@ -1,7 +1,11 @@
 /*
 <<<<<<<<<<<---APPROACH-->>>>>>>>>>>>>>
+max heap : priority_queue<int>maxh;
+min heap : priority_queue<int,vector<int>,greater<int>>minh;
 1.heap is slao a complete BT (which has both child or no child)
-2.
+2. min heap ,preorder traversal produces ascending order
+3. max heap ,							descending order
+4.
 */
 #include<bits/stdc++.h>
 using namespace std;
