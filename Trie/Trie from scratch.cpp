@@ -34,17 +34,23 @@ void insert(Node* root, string s)
 	for (int i = 0; i < s.size(); i++)
 	{
 		// int indx = x - 'a';
-		int indx = s[i] - 'a';
+		int indx = s[i] - 'a';	// for finding the node in the root
+		//agr rparent root ka vo indx ka node khali hai toh uus index se naya trie aage bna do
 		if (temp->children[indx] == NULL ) //if(child node belonging to current char is null)
 		{
 			temp->children[indx] = newNode();//child node=new Node();
 		}
+		//after making the new trie from index appoint that node as current node for further continuation
 		temp = temp->children[indx];//current_node=child_node;
+		//word count just to mark that we have visited
 		temp->word_count += 1;
+
 	}
 	// cout << word_count;
 }
-
+//we also start the iteration with the first character and the dummy node.
+// If we do not find the character in its children, we can return false/0.
+// Remember to check Word_count after reaching the end of word.
 //SEARCH OPERATION IN STRING
 int search(Node* temp, string s)
 {
@@ -54,10 +60,10 @@ int search(Node* temp, string s)
 		// int indx = x - 'a';
 		int indx = s[i] - 'a';
 		if (temp->children[indx] == NULL)
-			return 0;
-		temp = temp->children[indx];
+			return 0;	//mtlb us index ko kabhi visit kiya hi nhi so false
+		temp = temp->children[indx];//agr us indx ka trie hai toh aage bado
 	}
-	return temp->word_count;
+	return temp->word_count;//
 }
 
 // The pseudo code to check wether a single word exists in a dictionary of words or not is as follows:
@@ -115,4 +121,3 @@ find hak
 OUTPUT
 2
 0
-*/
