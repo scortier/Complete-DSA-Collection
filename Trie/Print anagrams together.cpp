@@ -24,6 +24,12 @@ vector<vector<string> > Anagrams(vector<string>& s_list)
 	return ans;
 }
 
+
+//implementation by trie data structure
+void trie(string s)
+{
+
+}
 int32_t main()
 {
 	int n; cin >> n;
