@@ -14,7 +14,7 @@ Node *newNode(int x)
 	return temp;
 }
 
-
+//M-1
 void rightutil(Node *root, int level , int *maxl)
 {
 	if (root == NULL) return;
@@ -36,6 +36,7 @@ void rightview(Node *root)
 	rightutil(root, 1, &maxl);
 }
 
+//M-2
 //alternative for pointer fear
 //PURA CODE LIKHO AUR JO VALUE HAR POINT PAR UPDATE HO UUSE & LAGAKE FUNCTION K VAR PART M PASS KARDO
 
@@ -59,6 +60,22 @@ void rightview_ptr(Node *root)
 	int maxl = 0;
 	rightutil_ptr(root, 1, maxl);
 }
+
+//M-3
+int maxl = 0;
+void right_solve(Node *root, int level)
+{
+	if (root == NULL) return;
+
+	if (level >= maxl)
+	{
+		cout << root->data << " ";
+		maxl++;
+	}
+
+	right_solve(root->right, level + 1);
+	right_solve(root->left, level + 1);
+}
 int main()
 {
 
@@ -72,5 +89,7 @@ int main()
 	rightview(root);
 	cout << endl;
 	rightview_ptr(root);
+	cout << endl;
+	right_solve(root, 0);
 	return 0;
 }

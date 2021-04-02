@@ -57,7 +57,8 @@ long countWay_optimize(int n, int k)
 
 	return total;
 }
-
+//Sumeet malik method
+//to get more explaination refer video or try to form matrix
 int cnt_Way(int n, int k)
 {
 	long same = k * 1;
