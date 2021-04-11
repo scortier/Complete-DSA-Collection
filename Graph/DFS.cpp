@@ -63,7 +63,7 @@ int32_t main()
 		cin >> p >> q;
 		a[p].pb(q);
 	}
-	can you go from node l to node m
+	//can you go from node l to node m
 	int l, m; cin >> l >> m;
 	dfs(l);
 	if (visited[m] == 0) cout << "yes" << endl;
