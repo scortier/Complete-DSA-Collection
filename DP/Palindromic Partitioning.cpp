@@ -41,7 +41,7 @@ int partition(string s, int i, int j)
 	if (i == j and i > j) return 0;
 	if (ispalindrome(s, i, j) == true)
 		return 0;
-
+	int left, right;
 	if (t[i][j] != -1) return t[i][j];
 	int mn = INT_MAX;
 	for (int k = i; k <= j - 1; k++)

@@ -1,15 +1,7 @@
 // QUARANTINE DAYS..;)
 #include <bits/stdc++.h>
 using namespace std;
-#define endl 		    "\n"
 
-void lage_rho() {
-	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
-}
 /**********====================########################=================***********/
 #define N 4
 
@@ -94,8 +86,70 @@ bool solveNQ()
 }
 int32_t main()
 {
-	lage_rho();
 	solveNQ();
 
 	return 0;
 }
+
+
+
+
+
+/////////////////////////////////////////////////////
+
+
+class Solution {
+public:
+	vector<vector<string>>ans;
+
+	//func to check if queen can be placed or not in part row
+	bool isSafe(int row, int col, int n, vector<string>&board)
+	{
+		for (int i = 0; i < row; i++) //check the column
+		{
+			if (board[i][col] == 'Q')
+				return false;
+		}
+		for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) //check left diagonal
+		{
+			if (board[i][j] == 'Q')
+				return false;
+		}
+		for (int i = row - 1, j = col + 1; i >= 0 && j >= 0; i--, j++) //check right diagonal
+		{
+			if (board[i][j] == 'Q')
+				return false;
+		}
+		// If there is no queen placed in left, or right diagonal or in the same column, then place the queen by returning true
+		return true;
+	}
+
+	//to generate all possible combination
+	void util(vector<string>&board, int n, int row)
+	{
+// if we have reached the end for a particular column, push the current combination into the result and return
+		if (row == n)
+		{
+			ans.push_back(board);
+			return;
+		}
+//  We iterate over column and hence row ,left and right diagonal  remain to be considered which we consider in check function
+		for (int col = 0; col < n; col++)
+		{
+			//if it can be placed
+			if (isSafe(row, col, n, board))
+			{
+				board[row][col] = 'Q'; //place the queen in that row and col
+				util(board, n, row + 1); //check the next row for plaement
+				board[row][col] = '.'; //reset it for future column and row combination.
+			}
+		}
+		return;
+	}
+
+	vector<vector<string>> solveNQueens(int n) {
+		vector<string>board(n, string(n, '.'));
+		util(board, n, 0);
+		return ans;
+	}
+};

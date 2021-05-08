@@ -9,7 +9,7 @@ Above question implementation using all path of tree
 using namespace std;
 
 struct Node {
-	int data;
+	int val;
 	struct Node *left, *right;
 };
 
@@ -17,7 +17,7 @@ Node *newNode(int x)
 {
 	Node* temp = new Node;
 	temp->left = temp->right = NULL;
-	temp->data = x;
+	temp->val = x;
 	return temp;
 }
 
@@ -29,7 +29,7 @@ int convert_decimal(vector<int> v)
 		n = n * 2 + v[i];
 	return n;
 }
-void findpath(TreeNode* root, vector<int> t)
+void findpath(Node* root, vector<int> t)
 {
 	if (!root)return;
 	t.push_back(root->val);
@@ -37,7 +37,7 @@ void findpath(TreeNode* root, vector<int> t)
 	findpath(root->left, t);
 	findpath(root->right, t);
 }
-int sumRootToLeaf(TreeNode* root) {
+int sumRootToLeaf(Node* root) {
 	if (!root)return 0;
 	vector<int> t;
 	findpath(root, t);

@@ -18,7 +18,7 @@ class WordDictionary {
 		Trienode *temp = root;
 		temp->c = data;
 		temp->end = 0;
-		for (inti = 0; i < 26; i++)
+		for (int i = 0; i < 26; i++)
 			temp->child[i] = NULL;
 		return temp;
 	}

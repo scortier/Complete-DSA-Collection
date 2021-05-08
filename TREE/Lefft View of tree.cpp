@@ -14,45 +14,46 @@ Node *newNode(int x)
 	return temp;
 }
 
-
-void leftutil(Node *root, int level , int *maxl)
+//m-1
+void leftutil(Node *root, int level , int *max_horizontal_level)
 {
 	if (root == NULL) return;
 
-	if (*maxl < level)
+	if (*max_horizontal_level < level)
 	{
 		cout << root->data << " ";
-		*maxl = level;
+		*max_horizontal_level = level;
 	}
 
-	leftutil(root->left, level + 1, maxl);
-	leftutil(root->right, level + 1, maxl);
+	leftutil(root->left, level + 1, max_horizontal_level);
+	leftutil(root->right, level + 1, max_horizontal_level);
 }
-int maxl;
+void leftview(Node *root)
+{
+	int max_horizontal_level = 0;
+	leftutil(root, 1, &max_horizontal_level);
+}
+
+//m-2
+int max_horizontal_level;
 void leftutil_shortm(Node *root, int level)
 {
 	if (root == NULL) return;
 
-	if (level >= maxl)
+	if (level >= max_horizontal_level)
 	{
 		cout << root->data << " ";
-		maxl++;
+		max_horizontal_level++;
 	}
 
 	leftutil_shortm(root->left, level + 1);
 	leftutil_shortm(root->right, level + 1);
 }
 
-void leftview(Node *root)
-{
-	int maxl = 0;
-	leftutil(root, 1, &maxl);
-}
+
 
 int main()
 {
-
-
 	Node *root = newNode(1);
 	root->left = newNode(2);
 	root->right = newNode(3);

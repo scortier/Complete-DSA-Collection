@@ -25,55 +25,36 @@ Node *newNode(int x)
 
 void leftview(Node *root)
 {
-	if (root == NULL)
+	if (!root)
 		return;
 
-	queue<Node*>q;
-
-	// Push root
+	queue<Node*> q;
 	q.push(root);
 
-	// Delimiter
-	q.push(NULL);
+	while (!q.empty())
+	{
+		// number of nodes at current level
+		int n = q.size();
 
+		// Traverse all nodes of current level
+		for (int i = 1; i <= n; i++)//while(!q.size())
+		{
+			Node* temp = q.front();
+			q.pop();
 
-	while (!q.empty()) {
-		Node* temp = q.front();
+			// Print the left most element
+			// at the level
+			if (i == 1)
+				cout << temp->data << " ";
 
-		if (temp) {
+			// Add left node to queue
+			if (temp->left != NULL)
+				q.push(temp->left);
 
-			// Prints first node
-			// of each level
-			cout << temp->data << " ";
-
-			// Push children of all nodes at
-			// current level
-			while (q.front() != NULL) {
-
-				// If left child is present
-				// push into queue
-				if (temp->left)
-					q.push(temp->left);
-
-				// If right child is present
-				// push into queue
-				if (temp->right)
-					q.push(temp->right);
-
-				// Pop the current node
-				q.pop();
-
-				temp = q.front();
-			}
-
-			// Push delimiter
-			// for the next level
-			q.push(NULL);
+			// Add right node to queue
+			if (temp->right != NULL)
+				q.push(temp->right);
 		}
-
-		// Pop the delimiter of
-		// the previous level
-		q.pop();
 	}
 }
 

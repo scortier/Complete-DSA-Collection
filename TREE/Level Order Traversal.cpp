@@ -54,7 +54,7 @@ void LevelOrder_linebyline(Node* root)
 		if (size == 0) break;
 
 //dhyan de y size hai(constant) naaki q.size() jo update ho rha ,size ko line 53 m har baar updare karenge
-		while (size > 0)
+		while (size > 0)//for(int i=0;i<n;i++) look left view iteraive soln
 		{
 			Node *temp = q.front();
 			cout << temp->data << " ";

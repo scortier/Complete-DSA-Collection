@@ -15,14 +15,13 @@ void printnodes_KDist(struct Node *root , int k)
 		return;
 	if ( k == 0 )//MEANS ROOT KI BAAT HO RHI
 	{
-		printf( "%d ", root->data );
+		cout << root->data;
 		return ;
 	}
-	else
-	{
-		printnodes_KDist( root->left, k - 1 ) ;
-		printnodes_KDist( root->right, k - 1 ) ;
-	}
+
+	printnodes_KDist( root->left, k - 1 ) ;
+	printnodes_KDist( root->right, k - 1 ) ;
+
 }
 struct Node* newNode(int data)
 {

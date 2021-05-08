@@ -32,6 +32,67 @@ int findmaxutil(Node* root, int &res)
 	return max_single;
 }
 
+int findmaxpath_from_any_NodeToNode(Node* root, int &res)
+{
+	//base condn
+	if (root == NULL) return 0;
+
+	//hypothesis
+	int l = findmaxpath_from_any_NodeToNode(root->left, res);
+	int r = findmaxpath_from_any_NodeToNode(root->right, res);
+
+	//induction
+	int temp = 1 + max(l, r);
+	int ans = max(temp, 1 + l + r);
+	int res = max(res, ans);
+
+	return temp;
+}
+
+int findmaxpath_from_any_NodeToNode(Node* root, int &res)
+{
+	//base condn
+	if (root == NULL)
+		return 0;
+
+	//hypothesis
+	int l = findmaxpath_from_any_NodeToNode(root->left, res);
+	int r = findmaxpath_from_any_NodeToNode(root->right, res);
+
+	//induction
+	// int temp=1+max(l,r);
+	int temp = max(max(l, r) + root->data, root->data);
+	int ans = max(temp, root->data + l + r);
+	int res = max(res, ans);
+
+	return temp;
+
+}
+
+int findmaxpath_from_any_LeafToLeaf(Node* root, int &res)
+{
+	//base condn
+	if (root == NULL)
+		return 0;
+
+	//hypothesis
+	int l = findmaxpath_from_any_LeafToLeaf(root->left, res);
+	int r = findmaxpath_from_any_LeafToLeaf(root->right, res);
+
+	//induction
+	// int temp=1+max(l,r);
+	int temp = max(max(l, r) + root->data, root->data);
+	if (root->left == NULL and root->right == NULL)
+		temp = max(temp, root->data);
+	int ans = max(temp, root->data + l + r);
+	int res = max(res, ans);
+
+	return temp;
+
+}
+
+
+
 int findMaxSum(Node *root)
 {
 	int res = INT_MIN;

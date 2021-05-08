@@ -17,6 +17,8 @@ APPROACH:
 
 	Find inorder successor of the node. Copy contents of the inorder successor to the node
 	and delete the inorder successor. Note that inorder predecessor can also be used.
+	inorder - 40 50 60 70 80 , if we remove 50 then we can put predecessor i.e 40 or successor i.e 60
+
 	          50                            60
            /     \         delete(50)      /   \
           40      70       --------->    40    70
@@ -52,6 +54,15 @@ void inorder(Node* root)
 		inorder(root->right);
 	}
 }
+//USE THIS instead of below min and max to print in spiral format
+//same as in ques in leetcode : https://leetcode.com/problems/delete-node-in-a-bst/submissions/
+int minm(TreeNode* root) {
+	while (root->left != nullptr)
+		root = root->left;
+	return root->val;
+}
+
+
 int min(Node *root)
 {
 	if (root->right != NULL) return min(root->right);
