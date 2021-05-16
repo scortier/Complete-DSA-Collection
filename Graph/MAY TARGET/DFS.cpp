@@ -24,7 +24,9 @@ class Solution {
 		for (auto child : adj[node])
 		{
 			if (!vis[child])
+			{
 				dfs(child, vis, adj, storeDfs);
+			}
 		}
 	}
 
@@ -33,10 +35,14 @@ public:
 	{
 		vector<int>storeDfs;
 		vector<int>vis(V + 1, 0);
+
+		//this is for multiple comp
 		for (int i = 1; i <= V; i++)
 		{
 			if (!vis[i])
+			{
 				dfs(i, vis, adj, storeDfs);
+			}
 		}
 		return storeDfs;
 	}

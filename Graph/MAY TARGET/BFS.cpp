@@ -4,26 +4,20 @@ Approach - Breadth first earch
 */
 class Solution {
 public:
-	vector<int>bfs(int V, vector<int>adj[])
+	void bfs(int node, vector<int> &vis, vector<int> adj[], vector<int> &storeBfs)
 	{
-		vector<int>bfs;
-		//to mark visited nodes
-		vector<int>vis(V, 0);
-
 		// for processing
 		queue<int>q;
 
 		//jaha se start kar rhee uuse q m insert kardo and mark as visited
-		q.push(0);
-		vis[0] = 1;
+		q.push(i);
+		vis[i] = 1;
 
 		while (!q.empty())
 		{
 			int node = q.front();
 			q.pop();
 			bfs.push_back(node);
-
-
 			for (auto child : adj[node])
 			{
 				if (!vis[child])
@@ -35,7 +29,25 @@ public:
 		}
 		return bfs;
 	}
-}
+
+	vector<int>bfsOfGraph(int V, vector<int>adj[])
+	{
+		vector<int>StoreBfs;
+
+		//to mark visited nodes
+		vector<int>vis(V + 1, 0);
+
+		//this is for multiple comp
+		for (int i = 1; i <= V; i++)
+		{
+			if (!vis[i])
+			{
+				bfs(i, vis, adj, StoreBfs);
+			}
+		}
+		return StoreBfs;
+	}
+};
 
 
 // { Driver Code Starts.
@@ -54,7 +66,7 @@ int main() {
 			int u, v;
 			cin >> u >> v;
 			adj[u].push_back(v);
-			// 		adj[v].push_back(u); // uncomment this for undirected graoh
+			// 		adj[v].push_back(u); // uncomment this for undirected graph
 		}
 		// string s1;
 		// cin>>s1;

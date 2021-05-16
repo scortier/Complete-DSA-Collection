@@ -2,14 +2,16 @@
 using namespace std;
 
 int main() {
-	int n, m;
-	cin >> n >> m;
+	int nodes, edges;
+	cin >> nodes >> edges;
 
 	// declare the adjacent matrix
-	vector<int> adj[n + 1];
+	//vector at every index
+	//at every index we can store a vector
+	vector<int> adj[nodes + 1];
 
 	// take edges as input
-	for (int i = 0; i < m; i++) {
+	for (int i = 0; i < edges; i++) {
 		int u, v;
 		cin >> u >> v;
 		adj[u].push_back(v);
