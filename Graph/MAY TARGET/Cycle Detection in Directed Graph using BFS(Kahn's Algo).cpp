@@ -7,12 +7,13 @@ So try to implement topo sort using kahns here agr hai mtlb cycle hai varna cycl
 
 class Solution {
 public:
-	bool isCyclic(int N, vector<int> adj[]) {
+	bool isCyclic(int V, vector<int> adj[]) {
 		queue<int>q;
 
-		vector<int>indegree(N, 0);
+		//1-based indexing and initialize with 0
+		vector<int>indegree(V + 1, 0);
 
-		for (int i = 0; i < N; i++)
+		for (int i = 1; i <= V; i++)
 		{
 			for (auto ch : adj[i])
 			{
@@ -21,7 +22,7 @@ public:
 		}
 
 
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < V; i++)
 		{
 			if (indegree[i] == 0)
 			{
@@ -49,7 +50,7 @@ public:
 			}
 		}
 		// return topo;
-		if (cnt == N)
+		if (cnt == V)
 			return false;
 		return true;
 	}

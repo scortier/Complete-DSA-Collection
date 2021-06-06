@@ -8,6 +8,7 @@ o Check if is BST or not
 o Find inorder successor and inorder predecessor
 o Print all root node to leaf node paths
 o Find min and max value in BST
+o Construct BST from level order of it
 */
 
 #include<bits/stdc++.h>
@@ -297,4 +298,127 @@ int mAXValue(struct node* node)
 	return (current->data);
 }
 
-/////////////////////////////////////
+/////////////////Construct BST from level order of it////////////////////
+/*1) First pick the first element of the array and make it root.
+2) Pick the second element, if it’s value is smaller than root node value make it left child,
+3) Else make it right child
+4) Now recursively call the step (2) and step (3) to make a BST from its level Order Traversal.*/
+// function to construct a BST from
+// its level order traversal
+Node *LevelOrder(Node *root , int data)
+{
+	if (root == NULL) {
+		root = getNode(data);
+		return root;
+	}
+	if (data <= root->data)
+		root->left = LevelOrder(root->left, data);
+	else
+		root->right = LevelOrder(root->right, data);
+	return root;
+}
+
+Node* constructBst(int arr[], int n)
+{
+	if (n == 0)return NULL;
+	Node *root = NULL;
+
+	for (int i = 0; i < n; i++)
+		root = LevelOrder(root , arr[i]);
+
+	return root;
+}
+
+
+
+
+///////////////////////////////Kth Smallest in BST//////////////////////////
+/*
+Auxiliary Space is the extra space or temporary space used by an algorithm. Space Complexity of an algorithm is total space taken by the algorithm with respect to the input size. Space complexity includes both Auxiliary space and space used by input.
+
+TC:O(N) Auxilliary Space :O(H)
+The Inorder Traversal of a BST traverses the nodes in increasing order. So the idea is to traverse the tree in Inorder. While traversing, keep track of the count of the nodes visited. If the count becomes k, print the node.
+*/
+Node* kthSmallest(Node* root, int& k)
+{
+	// base case
+	if (root == NULL)
+		return NULL;
+
+	// search in left subtree
+	Node* left = kthSmallest(root->left, k);
+
+	// if k'th smallest is found in left subtree, return it
+	if (left != NULL)
+		return left;
+
+	// if current element is k'th smallest, return it
+	k--;
+	if (k == 0)
+		return root;
+
+	// else search in right subtree
+	return kthSmallest(root->right, k);
+}
+
+/*
+
+lcount is the no of nodes present in left subtree
+so just cal lcount pehle then apply this function
+agr lcount +1 hai k toh vo node root h
+agr k >(lcount +1) mtlb rst m hai node toh bache hue (k-(lcount+1)) wala ele dedo
+
+TC:O(H) Auxilliary Space :O(H)
+*/
+Node* kthSmallest(Node* root, int k)
+{
+	// base case
+	if (root == NULL)
+		return NULL;
+
+	int count = root->lCount + 1;
+	if (count == k)
+		return root;
+
+	if (count > k)
+		return kthSmallest(root->left, k);
+
+	// else search in right subtree
+	return kthSmallest(root->right, k - count);
+}
+
+// TC:O(H) Auxilliary Space :O(1) MTLB NO EXTRA SPACE
+// MORRIS TRAVERSAL - In this traversal, we first create links to Inorder successor and print the data using these links, and finally revert the changes to restore original tree.
+
+
+///////////////////////////////Kth LArgest in BST//////////////////////////
+/*
+Time Complexity: O(h + k).
+The code first traverses down to the rightmost node which takes O(h) time, then traverses k elements in O(k) time. Therefore overall time complexity is O(h + k).
+Auxilliary Space:O(1)
+*/
+void kthLargestUtil(Node *root, int k, int &c)
+{
+	// Base cases, the second condition is important to
+	// avoid unnecessary recursive calls
+	if (root == NULL || c >= k)
+		return;
+
+	// Follow reverse inorder traversal so that the
+	// largest element is visited first
+	kthLargestUtil(root->right, k, c);
+
+	// Increment count of visited nodes
+	c++;
+
+	// If c becomes k now, then this is the k'th largest
+	if (c == k)
+	{
+		cout << "K'th largest element is "
+		     << root->key << endl;
+		return;
+	}
+
+	// Recur for left subtree
+	kthLargestUtil(root->left, k, c);
+}

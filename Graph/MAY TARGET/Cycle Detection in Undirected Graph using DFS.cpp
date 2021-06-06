@@ -1,19 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// o- based indexing code
+// 1- based indexing code
 
 
 class Solution {
 
 private:
+	//Checking cycle using DFS
 	bool checkForCycle(int node, int parent, vector<int> &vis, vector<int> adj[]) {
 		vis[node] = 1;
 
 		for (auto ch : adj[node])
 		{
-			if (vis[ch] == 0)
+			if (vis[ch] == 0)//(!vis[ch])
 			{
+				// this cycle will go deeper n deeper and some node insied if return true tab toh baat ban gyi na
 				if (checkForCycle(ch, node, vis, adj))
 					return true;
 			}
@@ -30,7 +32,7 @@ public:
 		vector<int>vis(V + 1, 0);
 
 		//iterating over each vertex
-		for (int i = 0; i < V; i++)
+		for (int i = 1; i <= V; i++)
 		{
 			if (!vis[i])
 				if (checkForCycle(i, -1, vis, adj))

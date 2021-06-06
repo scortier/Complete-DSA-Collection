@@ -11,8 +11,9 @@ using namespace std;
 
 class Solution {
 
-public:
-	bool checkForCycle(int s, int V, vector<int> adj[], vector<int>& visited)
+
+	//Cycle check By BFS
+	bool checkForCycle(int src, int V, vector<int> adj[], vector<int>& visited)
 	{
 		//saare node ko -1 se initialize
 		vector<int>parent(V, -1);
@@ -21,16 +22,16 @@ public:
 		queue<pair<int, int>>q;
 
 		//node ko vis mark karo
-		visited[s] = true;
-		//q m puh karo with parent koi nhi as parent ka parent nhi hai
-		q.push(s, -1);
+		visited[src] = true;
+		//q m push karo with parent koi nhi as parent ka parent nhi hai
+		q.push({src, -1});
 
 		//jab tk q bhari hai trvaersal karte rho
 		while (!q.empty())
 		{
 
 			int node = q.front().first;
-			int par = q.front().second;
+			int node_ka_parent = q.front().second;
 			q.pop();
 
 			//dekho agr node k adj node vis hai ya nhi
@@ -38,33 +39,45 @@ public:
 			{
 				//agr vis nhi hai toh vis karao aur q m bhi push kar do
 				if (!visited[child])
-				{	visited[child] = 1;
+				{
+					visited[child] = 1;
 					q.push({child, node});
 				}
-				//agr vis hai and par!=chils toh badiya hai badhai ho
-				else if (par != child)
+
+				//agr vis hai and node_ka_parent child nhi hai toh badiya hai badhai ho
+				//MIRACLE MIRACLE MIRACLE
+				else if (node_ka_parent != child)
+				{
 					return true;
+				}
 			}
 		}
 		return false;
 	}
+
 public:
 	bool isCycle(int V, vector<int>adj[])
 	{
 		//make visited array and initialize all weit 0
-		vector<int>vis(V, 0);
+		vector<int>vis(V + 1, 0);
 
-		//trevaerse trought each vertex one by one
-		for (int i = 0; i < V; i++)
+		//traverse trought each vertex one by one
+		for (int i = 1; i <= V; i++)
 		{
 			//agr node vis nhi hai toh visite karao aur uske adj node ko bhi vis karao
 			if (!vis[i])
+			{
 				//aur agr adj node pehle viss nikla mtlb cycle hai
 				if (checkForCycle(i, V, adj, vis))
+				{
 					return true;
+				}
+			}
 		}
-	}//sab vi karliye par koi bhi adj node vis nhi mila hence cycle nhi hai
-	return false;
+		//sab vi karliye par koi bhi adj node vis nhi mila hence cycle nhi hai
+		return false;
+	}
+
 };
 
 
